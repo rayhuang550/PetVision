@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="40" fill="#F7F4ED"/>
+  <!-- a simple bowl -->
+  <path d="M44 104 h104 a52 52 0 0 1 -104 0 z" fill="#2B4ACB"/>
+  <ellipse cx="96" cy="104" rx="52" ry="14" fill="#4059C9"/>
+  <!-- kibble -->
+  <circle cx="78" cy="100" r="6" fill="#C98A3B"/>
+  <circle cx="96" cy="104" r="6" fill="#C98A3B"/>
+  <circle cx="114" cy="100" r="6" fill="#C98A3B"/>
+</svg>

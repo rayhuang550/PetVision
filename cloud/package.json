@@ -1,0 +1,15 @@
+{
+  "name": "petvision-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PetVision Cloud Backend: Firebase Realtime Database, Auth and Storage.",
+  "scripts": {
+    "setup": "node admin-setup.mjs",
+    "deploy": "firebase deploy --config ../firebase.json"
+  },
+  "devDependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-tools": "^13.11.0"
+  }
+}

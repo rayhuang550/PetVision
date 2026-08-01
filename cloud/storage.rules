@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isOwner() {
+      return request.auth != null && request.auth.token.owner == true;
+    }
+
+    function isDevice() {
+      return request.auth != null && request.auth.token.device == true;
+    }
+
+    function isImage() {
+      return request.resource.size <= 20 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /enroll/{pet} {
+      allow list: if isOwner();
+    }
+    match /enroll/{pet}/{file} {
+      allow get: if isOwner() || isDevice();
+      allow create: if isOwner() && isImage();
+      allow update: if (isOwner() || isDevice()) && isImage();
+      allow delete: if isOwner();
+    }
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

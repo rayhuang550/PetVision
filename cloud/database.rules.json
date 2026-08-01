@@ -1,0 +1,52 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "config": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      ".write": "auth.token.owner === true"
+    },
+
+    "hoppers": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      ".write": "auth.token.owner === true"
+    },
+
+    "pets": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      ".write": "auth.token.owner === true"
+    },
+
+    "log": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      "$pet": {
+        ".indexOn": ["ts"],
+        ".write": "auth.token.owner === true || auth.token.device === true"
+      }
+    },
+
+    "commands": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      ".indexOn": ["status"],
+      "$cmd": {
+        ".write": "auth.token.owner === true",
+        "status": { ".write": "auth.token.device === true && data.parent().child('status').val() === 'pending' && newData.exists() && (newData.val() === 'done' || newData.val() === 'held' || newData.val() === 'failed')" },
+        "reason": { ".write": "auth.token.device === true && data.parent().child('status').val() === 'pending'" },
+        "grams":  { ".write": "auth.token.device === true && data.parent().child('status').val() === 'pending'" },
+        "blocking_pet": { ".write": "auth.token.device === true && data.parent().child('status').val() === 'pending'" },
+        "result": { ".write": "auth.token.device === true && data.parent().child('status').val() === 'pending'" }
+      }
+    },
+
+    "status": {
+      ".read": "auth != null && (auth.token.owner === true || auth.token.device === true)",
+      "feeder": {
+        ".write": "auth.token.device === true",
+        "hold": {
+          ".write": "auth.token.owner === true && !newData.exists()"
+        }
+      }
+    }
+  }
+}

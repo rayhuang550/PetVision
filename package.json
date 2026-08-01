@@ -1,0 +1,21 @@
+{
+  "name": "petvision",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PetVision: a multi-pet feeder that identifies the pet at the bowl and dispenses its own diet.",
+  "license": "MIT",
+  "workspaces": [
+    "app",
+    "cloud"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace app",
+    "build": "npm run build --workspace app",
+    "deploy": "npm run deploy --workspace cloud"
+  },
+  "overrides": {
+    "universal-analytics": {
+      "uuid": "^9.0.1"
+    }
+  }
+}
